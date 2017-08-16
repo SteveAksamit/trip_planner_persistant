@@ -1,9 +1,15 @@
-var db = require('./_db');
+const db = require('./_db');
 
-var Place = require('./place');
-var Hotel = require('./hotel');
-var Restaurant = require('./restaurant');
-var Activity = require('./activity');
+const Place = require('./place');
+const Hotel = require('./hotel');
+const Restaurant = require('./restaurant');
+const Activity = require('./activity');
+const Day = require('./day');
+
+Day.belongsTo(Hotel);
+
+Day.belongsToMany(Restaurant, {through: 'RestaurantDay'});
+Day.belongsToMany(Activity, {through: 'ActivityDay'});
 
 Hotel.belongsTo(Place);
 Restaurant.belongsTo(Place);
