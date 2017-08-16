@@ -7,6 +7,8 @@ var Activity = require('../models').Activity;
 router.use('/hotels', require('./hotels'));
 router.use('/restaurants', require('./restaurants'));
 router.use('/activities', require('./activities'));
+router.use('/days', require('./days'));
+
 
 router.get('/', function(req, res, next) {
   Promise.all([
