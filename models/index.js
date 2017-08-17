@@ -17,6 +17,7 @@ Activity.belongsTo(Place);
 
 module.exports = {
 	db,
+	Day,
 	Place,
 	Hotel,
 	Restaurant,
