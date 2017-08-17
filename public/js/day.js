@@ -34,6 +34,7 @@ var dayModule = (function () {
     this.restaurants = [];
     this.activities = [];
     // for days based on existing data
+    console.log('data = ', data)
     utilsModule.merge(data, this);
     if (this.hotel) this.hotel = attractionsModule.getEnhanced(this.hotel);
     this.restaurants = this.restaurants.map(attractionsModule.getEnhanced);
@@ -53,6 +54,7 @@ var dayModule = (function () {
     this.$button = $('<button class="btn btn-circle day-btn"></button>')
       .text(this.number);
     var self = this;
+    console.log('this =', this)
     this.$button.on('click', function (){
       this.blur(); // removes focus box from buttons
       tripModule.switchTo(self);
@@ -112,6 +114,15 @@ var dayModule = (function () {
         break;
       default: console.error('bad type:', attraction);
     }
+    // console.log('attraction = ', attraction)
+    let type = attraction.type;
+    $.ajax({
+      // url: `${this.number}/${attraction.type}`,
+      method: 'PUT',
+      url: `days/${this.number}/${type}`,
+      data: {[type]: attraction.id}
+    })
+
     // activating UI
     attraction.show();
   };

@@ -1,9 +1,12 @@
 var router = require('express').Router();
 var Day = require('../models').Day;
+const Hotel = require('../models/hotel');
+const Restaurant = require('../models/restaurant');
+const Activity = require('../models/activity');
 
 router.get('/', function (req, res, next) {
 
-  Day.findAll({})
+  Day.findAll({include: [Hotel, Restaurant, Activity]})
   .then(days => {
     res.send(days)
   })
@@ -48,7 +51,7 @@ router.get('/:id', function (req, res, next) {
 })
 
 //Add/Update restaurant to day
-.put('/:id/restaurants', function (req, res, next) {
+.put('/:id/restaurant', function (req, res, next) {
   let dayId = req.params.id;
   let restaurantId = req.body.restaurant;
     
@@ -62,7 +65,7 @@ router.get('/:id', function (req, res, next) {
 })
 
 //Add/Update activity to day
-.put('/:id/activities', function (req, res, next) {
+.put('/:id/activity', function (req, res, next) {
   let dayId = req.params.id;
   let activityId = req.body.activity;
 
