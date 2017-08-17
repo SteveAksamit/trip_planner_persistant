@@ -58,7 +58,16 @@ var tripModule = (function () {
     if (days.length === 1) {
       currentDay = newDay;
     }
+    console.log('days = ', days)
     switchTo(newDay);
+    
+    //make persistant
+    $.post('/days', {number: newDay.number})
+    // $.ajax ({
+    //   type: "POST",
+    //   url: '/days',
+    //   data: {number: newDay.number}
+    // })
   }
 
   // ~~~~~~~~~~~~~~~~~~~~~~~
@@ -77,6 +86,13 @@ var tripModule = (function () {
     });
     switchTo(newCurrent);
     previousDay.hideButton();
+
+    //make delete persistant
+    $.ajax ({
+      type: "DELETE",
+      url: `/days/${index+1}`,
+    })
+    console.log("dayshould be deleted")
   }
 
   // globally accessible module methods
